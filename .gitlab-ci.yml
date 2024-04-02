@@ -2,6 +2,11 @@ default:
   tags:
     - common
 
+include:
+  - project: devops-school-2024/ci
+    ref: main
+    file: test-bare-app.yml
+
 lint:
   image: ghcr.io/malinkamedok/docker-image-go-lint:latest
   stage: test
