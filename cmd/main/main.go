@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"p.solovev/internal/app"
+	"p.solovev/internal/config"
+)
 
 func main() {
-	fmt.Println("Hello Yadro DevOps course!")
+	cfg, err := config.NewConfig()
+	if err != nil {
+		return
+	}
+
+	app.Run(cfg)
 }

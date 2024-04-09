@@ -1,0 +1,146 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Приложение для парсинга курсов валют ЦБ РФ",
+    "description": "Приложение, отдающее курс валюты по ЦБ РФ за определенную дату. Для получения курсов валют используется официальное API ЦБ РФ.",
+    "version": "0.3.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000"
+    }
+  ],
+  "paths": {
+    "/info/": {
+      "get": {
+        "summary": "Функция получения информации о приложении",
+        "description": "Возвращает информацию о версии, типе сервиса и авторе.",
+        "operationId": "getInfo",
+        "responses": {
+          "200": {
+            "description": "Данные получены успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/infoResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incorrectResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/info/currency": {
+      "get": {
+        "summary": "Функция получения курса валюты за определенную дату",
+        "description": "Принимает название валюты в формате ISO 4217 и дату в формате YYYY-MM-DD.",
+        "operationId": "getCurrencyRate",
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "query",
+            "description": "Название валюты в формате ISO 4217. Пример: USD",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Дата в формате YYYY-MM-DD",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Данные получены успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/currencyResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/incorrectResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "infoResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "example": "0.1.0"
+          },
+          "service": {
+            "type": "string",
+            "example": "currency"
+          },
+          "author": {
+            "type": "string",
+            "example": "p.solovev"
+          }
+        }
+      },
+      "currencyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "example": {
+              "USD": 33.4013
+            }
+          },
+          "service": {
+            "type": "string",
+            "example": "currency"
+          }
+        }
+      },
+      "incorrectResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Error rendering response."
+          },
+          "error": {
+            "type": "string",
+            "example": "some error info"
+          }
+        }
+      }
+    }
+  }
+}

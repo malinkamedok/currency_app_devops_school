@@ -11,7 +11,7 @@
 ### Сourse program
 
 - [x] Вводное занятие [What have I done?](https://gitlab-pub.yadro.com/devops-school-2024/student/p.solovev/-/merge_requests/1)
-- [ ] Разработка базового клиент-серверного приложения на Go
+- [x] Разработка базового клиент-серверного приложения на Go [What have I done?](https://gitlab-pub.yadro.com/devops-school-2024/student/p.solovev/-/merge_requests/3)
 - [ ] Упаковка разработанного приложения в Docker
 - [ ] Установка Jenkins. Jenkins Freestyle project
 - [ ] Написание Jenkins pipeline на Groovy
@@ -19,8 +19,94 @@
 - [ ] Развертывание k8s
 - [ ] CI/CD для запуска приложения в Kubernetes
 - [ ] Финальное демо
-- [ ] Получение оффера на стажировку :P
+- [ ] Получение оффера :P
 
 ### Application description
 
-*<span style="color:green">TBA soon....</span>*
+#### Приложение для парсинга курсов валют ЦБ РФ
+
+Приложение, отдающее курс валюты по ЦБ РФ за определенную дату. Для получения курсов валют используется официальное API ЦБ РФ.
+
+#### Структура приложения
+
+```bash
+.
+├── cmd
+│   └── main                # Точка входа в приложение
+├── internal
+│   ├── app                 # Сборка, настройка и запуск всех компонентов
+│   ├── config              # Конфигурации
+│   ├── controller
+│   │   └── http
+│   │       └── v1          # Обработка HTTP запросов
+│   ├── entity              # Сущности
+│   └── usecase             # Бизнес-логика
+│         └── cbrf          # Запрос и обработка данных от ЦБ РФ
+└── pkg
+    ├── httpserver          # Конфигурации HTTP сервера
+    └── web                 # Конфигурации для обработки JSON-ответов
+```
+
+#### Документация
+
+#### [OpenApi](/docs/openapi.yaml) документация внутри GitLab
+
+#### OpenApi документация, доступная по GET запросу
+
+<summary><code>GET</code> <code><b>/</b></code> <code>docs</code> <code><b>/</b></code></summary>
+
+#### Получение информации о приложении
+
+<details>
+ <summary><code>GET</code> <code><b>/</b></code> <code>info</code></summary>
+
+##### Example output
+
+```json
+{
+  "version": "0.1.0",
+  "service": "currency",
+  "author": "p.solovev"
+}
+```
+
+</details>
+
+#### Получение курса валюты за определенную дату
+
+<details>
+ <summary><code>GET</code> <code><b>/</b></code> <code>info</code> <code><b>/</b></code> <code>currency</code></summary>
+
+##### Parameters
+
+> | name     | type     | data type | example    | description                 |
+> |----------|----------|-----------|------------|-----------------------------|
+> | currency | optional | string    | USD        | Валюта в стандарте ISO 4217 |
+> | date     | optional | string    | 2016-01-06 | Дата в формате YYYY-MM-DD   |
+
+##### Example output
+
+```json
+{
+    "data": {
+      "USD": "33,4013"
+    },
+    "service": "currency"
+}
+```
+
+</details>
+
+#### Запуск приложения
+
+##### Bash
+
+```bash
+go mod tidy
+go build -o app cmd/main/main.go
+./app
+```
+
+##### Docker
+
+*To be done*
