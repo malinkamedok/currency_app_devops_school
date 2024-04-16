@@ -1,0 +1,11 @@
+name: psolovev
+
+services:
+  currency_app:
+    image: docker.io/malinkamedok/currency_app:${TAG-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${PORT-8000}:${PORT-8000}"

@@ -11,8 +11,8 @@
 ### Сourse program
 
 - [x] Вводное занятие [What have I done?](https://gitlab-pub.yadro.com/devops-school-2024/student/p.solovev/-/merge_requests/1)
-- [x] Разработка базового клиент-серверного приложения на Go [What have I done?](https://gitlab-pub.yadro.com/devops-school-2024/student/p.solovev/-/merge_requests/3)
-- [ ] Упаковка разработанного приложения в Docker
+- [x] Разработка базового клиент-серверного приложения на Go [What have I done?](docs/summary/hw1.md)
+- [x] Упаковка разработанного приложения в Docker [What have I done?](docs/summary/hw2.md)
 - [ ] Установка Jenkins. Jenkins Freestyle project
 - [ ] Написание Jenkins pipeline на Groovy
 - [ ] Настройка инфраструктуры под k8s с использованием Ansible
@@ -109,4 +109,17 @@ go build -o app cmd/main/main.go
 
 ##### Docker
 
-*To be done*
+```bash
+docker build -t solovev_currency_app . && docker run solovev_currency_app
+```
+
+##### Docker compose
+```bash
+docker compose up
+```
+
+##### Приложение также доступно к загрузке из Docker Hub
+
+```bash
+docker pull malinkamedok/currency_app:latest
+```
