@@ -1,0 +1,79 @@
+- name: Die if jenkins agent password is undefined
+  ansible.builtin.fail:
+    msg: "Parameter 'jenkins_agent_password' is  not defined."
+  when:
+    - "not jenkins_agent_password is defined"
+
+- name: Ensure neccessary packages installed
+  ansible.builtin.package:
+    state: present
+    name:
+      - curl
+      - openjdk-17-jdk-headless
+
+- name: Make sure directories exist
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+    recurse: true
+  loop:
+    - path: /usr/local/jenkins-service
+      mode: "0644"
+    - path: /opt/jenkins
+      mode: "0755"
+    - path: "{{ jenkins_agent_home }}"
+      mode: "0755"
+
+- name: Download swarm client
+  ansible.builtin.get_url:
+    url: "{{ jenkins_agent_jenkins_url }}/swarm/swarm-client.jar"
+    dest: /opt/jenkins/swarm-client.jar
+    mode: "0755"
+
+- name: Create group
+  ansible.builtin.group:
+    name: "{{ jenkins_agent_group }}"
+    state: present
+
+- name: Create user
+  ansible.builtin.user:
+    name: "{{ jenkins_agent_user }}"
+    group: "{{ jenkins_agent_group }}"
+    shell: /bin/sh
+    home: "{{ jenkins_agent_home }}"
+    state: present
+
+- name: Change home dir owner
+  ansible.builtin.file:
+    path: "{{ jenkins_agent_home }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ jenkins_agent_user }}"
+    group: "{{ jenkins_agent_group }}"
+    recurse: true
+
+- name: Create SH file
+  ansible.builtin.template:
+    dest: "{{ jenkins_agent_home }}/run_agent.sh"
+    mode: "0755"
+    src: run_agent.sh.j2
+
+- name: Create service
+  ansible.builtin.template:
+    dest: /etc/systemd/system/jenkins-agent.service
+    src: service.j2
+    mode: "0644"
+
+- name: Check if systemd is available
+  ansible.builtin.stat:
+    path: /bin/systemctl
+  register: systemctl_check
+
+- name: Enable Jenkins Agent service
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    name: jenkins-agent
+    daemon_reload: true
+  when: systemctl_check.stat.exists

@@ -1,2 +1,9 @@
 .idea
 .vscode/
+venv
+
+# Ansible
+.vault_password
+*.retry
+ansible.log
+inventory/manual.yml

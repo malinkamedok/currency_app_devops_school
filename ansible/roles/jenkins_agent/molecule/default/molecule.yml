@@ -1,0 +1,19 @@
+---
+driver:
+  name: podman
+platforms:
+  - name: ubuntu2310
+    image: ghcr.io/malinkamedok/devops_sandbox:master
+    pre_build_image: true
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      ubuntu2310:
+        jenkins_agent_user: "jenkins_agent"
+        jenkins_agent_group: "jenkins_agent"
+        jenkins_agent_jenkins_url: "http://172.17.0.1:8080"
+        jenkins_agent_username: "agent"
+        jenkins_agent_password: "agent"
+verifier:
+  name: testinfra

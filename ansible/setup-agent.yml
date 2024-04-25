@@ -1,0 +1,5 @@
+- name: Bootstrap Jenkins agent
+  hosts: workers
+  become: true
+  roles:
+    - jenkins_agent

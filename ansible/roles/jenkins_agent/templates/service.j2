@@ -1,0 +1,12 @@
+[Unit]
+Description=Jenkins Agent
+
+[Service]
+User={{ jenkins_agent_user }}
+Group={{ jenkins_agent_group }}
+WorkingDirectory={{ jenkins_agent_home }}
+ExecStart=java -jar /opt/jenkins/swarm-client.jar -url {{ jenkins_agent_jenkins_url }} -username {{ jenkins_agent_username }} -password {{ jenkins_agent_password }} -workDir {{ jenkins_agent_home }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

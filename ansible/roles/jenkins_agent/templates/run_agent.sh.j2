@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /opt/jenkins_agent/
+java -jar {{ jenkins_agent_home }}/swarm-client.jar -url {{ jenkins_agent_jenkins_url }} \
+-username {{ jenkins_agent_username }} -password {{ jenkins_agent_password }}

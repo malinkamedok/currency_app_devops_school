@@ -1,0 +1,8 @@
+---
+# defaults file for jenkins_agent
+
+jenkins_agent_user: "jenkins_agent"
+jenkins_agent_group: "jenkins_agent"
+jenkins_agent_jenkins_url: "http://10.0.0.2:8080"
+jenkins_agent_username: "agent"
+jenkins_agent_home: "/opt/jenkins_agent"

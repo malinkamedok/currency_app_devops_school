@@ -13,7 +13,7 @@
 - [x] Вводное занятие [What have I done?](https://gitlab-pub.yadro.com/devops-school-2024/student/p.solovev/-/merge_requests/1)
 - [x] Разработка базового клиент-серверного приложения на Go [What have I done?](docs/summary/hw1.md)
 - [x] Упаковка разработанного приложения в Docker [What have I done?](docs/summary/hw2.md)
-- [ ] Установка Jenkins. Jenkins Freestyle project
+- [x] Установка Jenkins. Jenkins Freestyle project [What have I done?](docs/summary/hw3.md)
 - [ ] Написание Jenkins pipeline на Groovy
 - [ ] Настройка инфраструктуры под k8s с использованием Ansible
 - [ ] Развертывание k8s

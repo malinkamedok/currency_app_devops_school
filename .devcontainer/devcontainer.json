@@ -1,5 +1,5 @@
 {
   "name": "currency app",
   "dockerFile": "Dockerfile",
-  "postCreateCommand": "go mod tidy",
+  "postCreateCommand": "go mod tidy"
 }
