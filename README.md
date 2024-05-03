@@ -14,7 +14,7 @@
 - [x] Разработка базового клиент-серверного приложения на Go [What have I done?](docs/summary/hw1.md)
 - [x] Упаковка разработанного приложения в Docker [What have I done?](docs/summary/hw2.md)
 - [x] Установка Jenkins. Jenkins Freestyle project [What have I done?](docs/summary/hw3.md)
-- [ ] Написание Jenkins pipeline на Groovy
+- [x] Написание Jenkins pipeline на Groovy [What have I done?](docs/summary/hw4.md)
 - [ ] Настройка инфраструктуры под k8s с использованием Ansible
 - [ ] Развертывание k8s
 - [ ] CI/CD для запуска приложения в Kubernetes
