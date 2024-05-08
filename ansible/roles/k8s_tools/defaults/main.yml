@@ -1,0 +1,7 @@
+---
+# defaults file for k8s_tools
+
+k8s_tools_version: "1.30"
+k8s_tools_kubelet_args:
+  container-runtime-endpoint: unix:///var/run/crio/crio.sock
+  runtime-request-timeout: 10m

@@ -1,0 +1,10 @@
+galaxy_info:
+  namespace: solovev
+  role_name: crio
+  author: Solovev Pavel <solovev_pavel21@mail.ru>
+  description: This role is designed to install and configure cri-o.
+  company: yadro
+
+  license: MIT
+
+  min_ansible_version: "2.1"

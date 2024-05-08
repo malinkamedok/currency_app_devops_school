@@ -1,0 +1,66 @@
+---
+# tasks file for k8s_tools
+
+- name: Ensure necessary packages are installed
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gpg
+
+- name: Ensure keyrings dir exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0o755"
+    owner: root
+    group: root
+
+- name: Ensure official GPG key exists
+  ansible.builtin.apt_key:
+    url: "https://pkgs.k8s.io/core:/stable:/v{{ k8s_tools_version }}/deb/Release.key"
+    state: present
+    keyring: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+- name: Ensure Kubernetes apt repository exists
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ k8s_tools_version }}/deb/ /"
+    state: present
+    update_cache: true
+    filename: kubernetes
+
+- name: Ensure kubelet, kubeadm, kubectl packages are installed
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 0
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: Ensure packages versions are held
+  ansible.builtin.dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: Ensure necessary kubelet arguments are set
+  ansible.builtin.template:
+    src: var/lib/kubelet/kubeadm-flags.env.j2
+    dest: /var/lib/kubelet/kubeadm-flags.env
+    mode: "0o644"
+
+- name: Ensure kubelet service is enabled
+  ansible.builtin.service:
+    name: kubelet
+    state: started
+    enabled: true

@@ -1,0 +1,12 @@
+- name: Ensure CRI-O, kubelet, kubeadm and kubectl are installed and configured
+  hosts: workers
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Import role
+      ansible.builtin.import_role:
+        name: crio
+
+    - name: Import role
+      ansible.builtin.import_role:
+        name: k8s_tools
