@@ -17,6 +17,14 @@ node {
         stage("Checkout repo") {
         checkoutRepo(checkoutConfigMap)
         }
+        stage('Run Go tests') {
+            def root = tool type: 'go', name: '1.22.2'
+            withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+                dir("repo/test"){
+                    sh 'go test . -v'
+                }
+            }
+        }
         stage('Build docker image') {
             buildDockerImage(dockerConfigMap)
         }
