@@ -12,7 +12,7 @@ def dockerConfigMap = [
 ]
 
 @Library("shared_library") _
-node ('swarm') {
+node {
     try {
         stage("Checkout repo") {
         checkoutRepo(checkoutConfigMap)
