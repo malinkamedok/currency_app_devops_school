@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-currency
+spec:
+  rules:
+    - host: currency.vnuk.tech
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-currency-app-devops-school
+                port:
+                  number: 80
