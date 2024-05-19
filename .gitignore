@@ -8,5 +8,6 @@
 *.retry
 ansible.log
 inventory/manual.yml
+**/playbook_log.txt
 
 **/__pycache__

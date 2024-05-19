@@ -15,8 +15,8 @@
 - [x] Упаковка разработанного приложения в Docker [What have I done?](docs/summary/hw2.md)
 - [x] Установка Jenkins. Jenkins Freestyle project [What have I done?](docs/summary/hw3.md)
 - [x] Написание Jenkins pipeline на Groovy [What have I done?](docs/summary/hw4.md)
-- [ ] Настройка инфраструктуры под k8s с использованием Ansible
-- [ ] Развертывание k8s
+- [x] Настройка инфраструктуры под k8s с использованием Ansible [What have I done?](docs/summary/hw5.md)
+- [x] Развертывание k8s [What have I done?](docs/summary/hw6.md)
 - [ ] CI/CD для запуска приложения в Kubernetes
 - [ ] Финальное демо
 - [ ] Получение оффера :P

@@ -39,6 +39,17 @@
     cache_valid_time: 0
     clean: true
 
+- name: Ensure package version is held
+  ansible.builtin.dpkg_selections:
+    name: cri-o
+    selection: hold
+
+- name: Ensure CRI-O config is set
+  ansible.builtin.template:
+    src: etc/crio/crio.conf.j2
+    dest: /etc/crio/crio.conf
+    mode: "0o644"
+
 - name: Ensure CRI-O service is started
   ansible.builtin.service:
     name: crio
@@ -65,10 +76,13 @@
         regexp: '\sswap\s'
         state: 'absent'
 
-- name: Ensure br_netfilter module is loaded
+- name: Ensure br_netfilter and overlay modules are loaded
   community.general.modprobe:
-    name: br_netfilter
+    name: "{{ item }}"
     state: present
+  loop:
+    - br_netfilter
+    - overlay
 
 - name: Ensure IP forwarding is enabled
   ansible.posix.sysctl:
