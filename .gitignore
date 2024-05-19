@@ -1,6 +1,7 @@
 **/.idea/
 **/.vscode/
 **/venv
+**/report.xml
 
 # Ansible
 .vault_password

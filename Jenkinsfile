@@ -14,15 +14,14 @@ def dockerConfigMap = [
 @Library("shared_library") _
 node {
     try {
-        stage("Checkout repo") {
-        checkoutRepo(checkoutConfigMap)
+        stage('Checkout repo') {
+            checkoutRepo(checkoutConfigMap)
         }
         stage('Run Go tests') {
             def root = tool type: 'go', name: '1.22.2'
             withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                dir("repo/test"){
-                    sh 'go test . -v'
-                }
+                sh 'go install github.com/jstemmer/go-junit-report/v2@latest'
+                sh 'go test -v 2>&1 ./repo/test | go-junit-report -set-exit-code > report.xml'
             }
         }
         stage('Build docker image') {
@@ -32,6 +31,7 @@ node {
             pushDockerImage(dockerConfigMap)
         }
     } finally {
+        junit 'report.xml'
         cleanWs(notFailBuild: true)
     }
 }
