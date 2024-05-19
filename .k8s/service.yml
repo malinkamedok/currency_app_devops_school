@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: serviceCurrencyAppDevopsSchool
+  name: service-currency-app-devops-school
   labels:
-    run: currencyAppDevopsSchool
+    run: currency-app-devops-school
 spec:
   ports:
   - port: 8000
     targetPort: 8000
     protocol: TCP
   selector:
-    app: currencyAppDevopsSchool
+    app: currency-app-devops-school
