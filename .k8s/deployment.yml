@@ -24,4 +24,4 @@ spec:
         - name: VERSION
           value: "0.3.0"
         - name: PORT
-          value: 8000
+          value: "8000"
