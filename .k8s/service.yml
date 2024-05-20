@@ -6,7 +6,7 @@ metadata:
     run: currency-app-devops-school
 spec:
   ports:
-  - port: 8000
+  - port: 80
     targetPort: 8000
     protocol: TCP
   selector:
