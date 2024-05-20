@@ -22,7 +22,7 @@ func Run(cfg *config.Config) {
 	logger2.InitLogger()
 
 	c := usecase.NewCurrencyUseCase(cbrf.NewCurrencyReq())
-	i := usecase.NewInfoUsecase(cfg.Version)
+	i := usecase.NewInfoUsecase(cfg.Version, cfg.Hostname)
 
 	handler := chi.NewRouter()
 
