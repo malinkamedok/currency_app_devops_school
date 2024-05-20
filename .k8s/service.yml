@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: service-currency-app-devops-school
   labels:
-    run: currency-app-devops-school
+    app: currency-app-devops-school
 spec:
   ports:
   - port: 80
