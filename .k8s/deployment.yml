@@ -25,3 +25,9 @@ spec:
           value: "0.3.2"
         - name: PORT
           value: "8000"
+        livenessProbe:
+          httpGet:
+            path: /info
+            port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
