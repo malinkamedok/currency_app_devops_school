@@ -66,4 +66,3 @@
 Для отображения хэдеров и красивого JSON была установлена утилита `httpie`.
 
 ![image](/docs/summary/hw7_pictures/pretty_curl_with_hostnames.png)
-
