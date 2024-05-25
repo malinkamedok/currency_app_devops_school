@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: currency
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:malinkamedok/currency_app_devops_school.git'
+    path: .k8s
+    targetRevision: master
+    directory:
+      recurse: true
+      jsonnet: {}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true

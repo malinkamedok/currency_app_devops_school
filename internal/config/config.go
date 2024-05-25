@@ -12,6 +12,7 @@ import (
 type Config struct {
 	Version string `env:"VERSION" envDefault:"0.3.0" validate:"required"`
 	Port    int    `env:"PORT" envDefault:"8000" validate:"required,number,gte=0,lte=65535"`
+	Hostname string `env:"HOSTNAME" envDefault:"host"`
 }
 
 func NewConfig() (*Config, error) {

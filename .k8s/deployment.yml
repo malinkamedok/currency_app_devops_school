@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-currency-app-devops-school
+  labels:
+    app: currency-app-devops-school
+    owner: p.solovev
+spec:
+  selector:
+    matchLabels:
+      app: currency-app-devops-school
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: currency-app-devops-school
+    spec:
+      containers:
+      - name: currency-app-devops-school
+        image: malinkamedok/currency_app:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: VERSION
+          value: "0.3.2"
+        - name: PORT
+          value: "8000"
